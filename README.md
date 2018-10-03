@@ -23,7 +23,8 @@ There were a lot of rumours lately [BitBns](http://en.wikipedia.org/wiki/Markdow
 * Run `node create_table.js` to create your table scheme.
 
 * Check out the video below:
-[![Video Thumbnail](https://tppr.s3.amazonaws.com/uploads/3271c72a2d04f43ffea974004823b13a.png "Video Thumbnail")](https://www.youtube.com/watch?v=kJMwJT0AEY0)
+[![Video Thumbnail](https://lh3.googleusercontent.com/dwz3N8undfjUp2oOhH0Xr0X6ZGrCooVHSJfCvhno2JA_JMMAC_Pp85Nurkx1llM63Ni0ssDhSJ5YDw=w2880-h1418-rw "Video Thumbnail")](https://www.youtube.com/watch?v=kJMwJT0AEY0)
+
 
 * Fill all the details such as URL to get SID and then the trade history URL, TradeHistoryBook Size, Email IDs
 
