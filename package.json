@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "concurrently \"node xrp.js\" \"node btc.js\""
+		"start": "app.js"
 	},
 	"dependencies": {
 		"axios": "^0.18.0",

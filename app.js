@@ -5,8 +5,15 @@ var moment = require('moment');
 var nodemailer = require('nodemailer');
 const signale = require('signale');
 
-const getSIDURL = 'https://wsbtc.bitbns.com/socket.io/?EIO=3&transport=polling&t=MIAJCK5';  // BTC Market
-const gettradeHistoryURL = 'https://wsbtc.bitbns.com/socket.io/?EIO=3&transport=polling&t=MIAJCM2&sid=';
+// You need to get the these URLs below from BitBns Website. 
+// Please check the Video on the readme to get this stuff.
+const getSIDURL = ''; 
+const gettradeHistoryURL = '';
+
+// You need to fill no.of Trade's in Trade History Book size thats on the website here.
+// At the time of pushing, the no of visible last trades are 15.
+const TradeHistoryBookSize = 15;
+
 // Configuring MySQL Connection settings
 var con = mysql.createConnection({
     host: "x.x.x.x",
@@ -43,11 +50,11 @@ function firstRun(){
           pass: 'password'
         }
       });
-      var temp = 'Hey! \n\n BitBns-Aggregator just started running right now ('+ now +') and monitoring BTC. You will be notified every 24 Hours about the aggregated volume. \n\n\n BitBns Aggregator';
+      var temp = 'Hey! \n\n BitBns-Aggregator just started monitoring right now ('+ now +'). You will be notified every 24 Hours about the aggregated volume. \n\n\n BitBns Aggregator';
       var mailOptions = {
         from: 'email',
         to: 'destination_email',
-        subject: 'BitBns Aggregator Started - BTC',
+        subject: 'BitBns Aggregator Started',
         text: temp
       };
       
@@ -125,17 +132,17 @@ function StoreDB() {
         return null;
     }
     var counter = 0;
-    var sql_query = "SELECT * FROM BTC_BitBns_TradeHistory"
+    var sql_query = "SELECT * FROM BitBns_TradeHistory"
     con.query(sql_query, function (err, result) {
         if (err) {
             throw err;
             StoreDB();
         }
         if (result.length <= 0) {
-            while (counter < 10) {
+            while (counter < TradeHistoryBookSize) {
                 // 0.00000001
                 var BTCTEMPVAR1 = (_x.data[counter].btc)*(0.00000001);
-                sql_query = "INSERT INTO BTC_BitBns_TradeHistory (TimeStamp, Volume, PPU) VALUES ('" + moment(_x.data[counter].time).format() + "'," + BTCTEMPVAR1 + "," + _x.data[counter].rate + ");"
+                sql_query = "INSERT INTO BitBns_TradeHistory (TimeStamp, Volume, PPU) VALUES ('" + moment(_x.data[counter].time).format() + "'," + BTCTEMPVAR1 + "," + _x.data[counter].rate + ");"
                 con.query(sql_query, function (err, result) {
                     if (err) throw err;
                     signale.success("First Run Order Book snapshot loaded into DB.");
@@ -149,13 +156,13 @@ function StoreDB() {
             }
         }
         else {
-            sql_query = "select * from BTC_BitBns_TradeHistory order by TimeStamp asc;"
+            sql_query = "select * from BitBns_TradeHistory order by TimeStamp asc;"
             con.query(sql_query, function (err, result) {
                 if (err) {
                     throw err;
                     StoreDB();
                 }
-                counter = 9;
+                counter = TradeHistoryBookSize - 1;
                 tempVariable = result.length - 1;
                 while (counter >= 0){
                     var BTCTEMPVAR2 = (_x.data[counter].btc)*(0.00000001);
@@ -166,7 +173,7 @@ function StoreDB() {
                             signale.watch("The condition failed. So skipping.");
                         }
                         else{
-                            sql_query = "INSERT INTO BTC_BitBns_TradeHistory (TimeStamp, Volume, PPU) VALUES ('" + moment(_x.data[counter].time).format() + "'," + BTCTEMPVAR2 + "," + _x.data[counter].rate + ");"        
+                            sql_query = "INSERT INTO BitBns_TradeHistory (TimeStamp, Volume, PPU) VALUES ('" + moment(_x.data[counter].time).format() + "'," + BTCTEMPVAR2 + "," + _x.data[counter].rate + ");"        
                             con.query(sql_query, function (err, result) {
                                 if (err) {
                                     throw err;
@@ -187,7 +194,7 @@ function StoreDB() {
 // Send an email with the total aggregated volume after 24 Hours.
 function SendMail_24Hours() {
     var Volume = 0;
-    sql_query = "SELECT SUM(Volume) AS Total FROM BTC_BitBns_TradeHistory;"
+    sql_query = 'SELECT SUM(Volume) AS "24 Hour Volume" FROM BitBns_TradeHistory;'
     con.query(sql_query, function (err, result) {
         if (err) throw err;
         Volume = result[0].Total;
@@ -199,11 +206,11 @@ function SendMail_24Hours() {
               pass: 'password'
             }
           });
-          var temp = 'Hey! \n\n Its been 24Hours and here is the total BTC Volume: ' + Volume + '\n\n\n BitBns Aggregator';
+          var temp = 'Hey! \n\n Its been 24Hours and here is the total Volume is : ' + Volume + '\n\n\n BitBns Aggregator';
           var mailOptions = {
             from: 'email',
             to: 'destination_email',
-            subject: '24 Hours BTC Volume',
+            subject: '24 Hours Volume',
             text: temp
           };
           
