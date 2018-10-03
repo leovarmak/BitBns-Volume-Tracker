@@ -12,7 +12,7 @@ const gettradeHistoryURL = '';
 
 // You need to fill no.of Trade's in Trade History Book size thats on the website here.
 // At the time of pushing, the no of visible last trades are 15.
-const TradeHistoryBookSize = 15;
+const TradeHistoryBookSize = ;
 
 // Configuring MySQL Connection settings
 var con = mysql.createConnection({
