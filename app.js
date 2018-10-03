@@ -166,7 +166,8 @@ function StoreDB() {
                 counter = TradeHistoryBookSize - 1;
                 tempVariable = result.length - 1;
                 while (counter >= 0){
-                    var BTCTEMPVAR2 = (_x.data[counter].btc)*(0.00000001);
+                    // Incase you are montioring BTC then you need to uncomment this
+                    // var BTCTEMPVAR2 = (_x.data[counter].btc)*(0.00000001);
                     var tempDate = moment(_x.data[counter].time).format();
                     console.log(moment(_x.data[counter].time).format())
                     if (tempDate > result[tempVariable].TimeStamp) {
