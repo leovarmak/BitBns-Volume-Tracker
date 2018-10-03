@@ -9,6 +9,7 @@ There were a lot of rumours lately [BitBns](http://en.wikipedia.org/wiki/Markdow
 ## Prerequisites:
 * Node.js
 * MySQL 5.6
+* pm2
 
 ----
 ## Install:
@@ -16,15 +17,27 @@ There were a lot of rumours lately [BitBns](http://en.wikipedia.org/wiki/Markdow
     cd BitBns-Volume-Tracker/
     npm install
 * Setup your MySQL and fill your details inside 
-    `btc.js`, `create_db.js`, `create_table.js`, `xrp.js`
+    `app.js`, `create_db.js`, `create_table.js`
 
 * Run `node create_db.js` to create the DB.
-* Run `create_table.js` to create your table scheme.
+* Run `node create_table.js` to create your table scheme.
+
+* Check out the video below:
+[![Video Thumbnail](https://tppr.s3.amazonaws.com/uploads/3271c72a2d04f43ffea974004823b13a.png "Video Thumbnail")](https://www.youtube.com/watch?v=kJMwJT0AEY0)
+
+* Fill all the details such as URL to get SID and then the trade history URL, TradeHistoryBook Size, Email IDs
+
+
+
 
 ----
 ## Run:
-    npm start
-If you want you can run it with `pm2`. 
+    pm2 start app.js
+
+User will get the timestamp on the email incase he forgets at what time her started the program
+
+User will also get the 24 Hour Volume on the email he provided incase he forgets to stop the server exactly after 24 Hours.
+ 
 
 ----
 ## Issues:
