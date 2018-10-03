@@ -140,8 +140,9 @@ function StoreDB() {
         }
         if (result.length <= 0) {
             while (counter < TradeHistoryBookSize) {
-                // 0.00000001
-                var BTCTEMPVAR1 = (_x.data[counter].btc)*(0.00000001);
+                
+                // Incase you are montioring BTC then you need to uncomment this
+                // var BTCTEMPVAR1 = (_x.data[counter].btc)*(0.00000001);
                 sql_query = "INSERT INTO BitBns_TradeHistory (TimeStamp, Volume, PPU) VALUES ('" + moment(_x.data[counter].time).format() + "'," + BTCTEMPVAR1 + "," + _x.data[counter].rate + ");"
                 con.query(sql_query, function (err, result) {
                     if (err) throw err;
