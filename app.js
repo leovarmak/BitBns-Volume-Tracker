@@ -12,7 +12,7 @@ const gettradeHistoryURL = '';
 
 // You need to fill no.of Trade's in Trade History Book size thats on the website here.
 // At the time of pushing, the no of visible last trades are 15.
-const TradeHistoryBookSize = ;
+const TradeHistoryBookSize = X;
 
 // Configuring MySQL Connection settings
 var con = mysql.createConnection({
@@ -175,7 +175,7 @@ function StoreDB() {
                             signale.watch("The condition failed. So skipping.");
                         }
                         else{
-                            sql_query = "INSERT INTO BitBns_TradeHistory (TimeStamp, Volume, PPU) VALUES ('" + moment(_x.data[counter].time).format() + "'," + BTCTEMPVAR2 + "," + _x.data[counter].rate + ");"        
+                            sql_query = "INSERT INTO BitBns_TradeHistory (TimeStamp, Volume, PPU) VALUES ('" + moment(_x.data[counter].time).format() + "'," + _x.data[counter].btc + "," + _x.data[counter].rate + ");"        
                             con.query(sql_query, function (err, result) {
                                 if (err) {
                                     throw err;
