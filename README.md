@@ -3,7 +3,7 @@
 ----
 ## What is this all about:
 There were a lot of rumours lately [BitBns](http://en.wikipedia.org/wiki/Markdown), an Indian cryptocurrency exchange was faking it trade volumes. So I have decide to make this project to find out is its true.
- I have written a detailed medium post here - 
+ I have written a detailed medium post here - https://medium.com/@karthikvarma/the-dirty-and-cheap-tricks-used-by-bitbns-to-fight-competition-5ad07712a179
 
 ----
 ## Prerequisites:
