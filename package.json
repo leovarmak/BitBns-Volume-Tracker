@@ -1,16 +1,20 @@
 {
-	"name": "BitBns-Aggregator",
-	"version": "0.0.1",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "app.js"
-	},
-	"dependencies": {
-		"axios": "^0.18.0",
-		"concurrently": "^3.6.0",
-		"moment": "^2.22.2",
-		"mysql": "^2.15.0",
-		"nodemailer": "^4.6.7",
-		"signale": "^1.2.1"
-	}
+  "name": "BitBns-Aggregator",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "app.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "concurrently": "^3.6.0",
+    "moment": "^2.22.2",
+    "mysql": "^2.15.0",
+    "nodemailer": "^4.6.7",
+    "signale": "^1.2.1",
+    "snyk": "^1.161.1"
+  },
+  "snyk": true
 }
